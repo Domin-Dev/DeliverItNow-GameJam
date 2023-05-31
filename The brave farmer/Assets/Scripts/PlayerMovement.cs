@@ -36,8 +36,14 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Hit");
         } 
         
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && groundChecker.CanGrow())
         {
+            animator.SetTrigger("Watering");
+        } 
+        
+        if (Input.GetKeyDown(KeyCode.R) && groundChecker.CanGrow())
+        {
+            // seeding
             animator.SetTrigger("Watering");
         }
 
@@ -48,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         float Horizontal = Input.GetAxis("Horizontal");
         rigidbody2D.velocity = new Vector2(Horizontal * playerSpeed * Time.fixedDeltaTime * 10, rigidbody2D.velocity.y);
 
-        if(rigidbody2D.velocity.y > 0)
+        if(rigidbody2D.velocity.y > 0.01f)
         {
             animator.SetBool("IsJumping", true);
         }

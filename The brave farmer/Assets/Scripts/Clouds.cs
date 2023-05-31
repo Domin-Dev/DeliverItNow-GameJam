@@ -17,6 +17,8 @@ public class Clouds : MonoBehaviour
         MakeClouds();
     }
 
+
+    
     private void MakeClouds()
     {
         float x = transform.position.x;

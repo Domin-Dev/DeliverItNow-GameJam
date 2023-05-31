@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Blok
+  - Cube
+  - Plant
   layers:
   - Default
   - TransparentFX
