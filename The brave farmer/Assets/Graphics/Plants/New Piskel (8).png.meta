@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 20fb92411a20d1e46b1b1829d0d82b09
+guid: a796af0c58954f24e890ba2b5a0051a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -256329436847572505
-    second: Sunflower_0
+      213: 3275028520990625885
+    second: New Piskel (8)_0
   - first:
-      213: -7039873942469640697
-    second: Sunflower_1
-  - first:
-      213: 8782663904212672053
-    second: Sunflower_2
+      213: 3150403194116108143
+    second: New Piskel (8)_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -136,7 +133,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sunflower_0
+      name: New Piskel (8)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,35 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e9793b3cb5517cf0800000000000000
-      internalID: -256329436847572505
+      spriteID: d505be6861d337d20800000000000000
+      internalID: 3275028520990625885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sunflower_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70e719bb2f75d4e90800000000000000
-      internalID: -7039873942469640697
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sunflower_2
+      name: New Piskel (8)_1
       rect:
         serializedVersion: 2
         x: 0
@@ -192,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53edd30d94a42e970800000000000000
-      internalID: 8782663904212672053
+      spriteID: f6feb84730b78bb20800000000000000
+      internalID: 3150403194116108143
       vertices: []
       indices: 
       edges: []
@@ -201,7 +177,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0f8f6d3ce16b84340af9a9838f83317d
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

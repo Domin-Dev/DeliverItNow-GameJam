@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && groundChecker.CanHit())
         {
             animator.SetTrigger("Hit");
         } 

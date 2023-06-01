@@ -5,8 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Plant 
 {
-    public GameObject seedling;
+    public GameObject plant1;
+    public GameObject plant2;
     public GameObject stem;
-    public GameObject plant;
+
     
 }
