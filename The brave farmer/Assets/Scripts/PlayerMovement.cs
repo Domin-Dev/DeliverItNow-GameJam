@@ -16,8 +16,10 @@ public class PlayerMovement : MonoBehaviour
 
     bool isJumping;
 
+    Vector3 startPosition;
     private void Start()
     {
+        startPosition = transform.position;
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         groundChecker = transform.GetComponentInChildren<GroundChecker>();
@@ -26,6 +28,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            Transform transformCart = GameObject.FindGameObjectWithTag("Cart").transform;
+            transformCart.parent.GetChild(1).GetComponent<WheelJoint2D>().useMotor = true;
+            transformCart.parent.GetChild(2).GetComponent<WheelJoint2D>().useMotor = true;
+        }
+
+
+        if(transform.position.y < -2)
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            transform.position = startPosition;
+        }
+
         if(Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded())
         {
             isJumping = true;
@@ -43,8 +59,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.R) && groundChecker.CanGrow())
         {
-            // seeding
-            animator.SetTrigger("Watering");
+            animator.SetTrigger("Seeding");
         }
 
     }

@@ -4,13 +4,46 @@ using UnityEngine;
 
 public class Push : MonoBehaviour
 {
-    
+
+    bool addForce;
+
+    Rigidbody2D wheel1;
+    Rigidbody2D wheel2;
+    private void Start()
+    {
+       Transform transformCart = GameObject.FindGameObjectWithTag("Cart").transform;
+        wheel1 = transformCart.parent.GetChild(1).GetComponent<Rigidbody2D>();
+        wheel2 = transformCart.parent.GetChild(2).GetComponent<Rigidbody2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Cart"))
         {
-            collision.transform.parent.GetChild(1).GetComponent<WheelJoint2D>().useMotor = true;
-            collision.transform.parent.GetChild(2).GetComponent<WheelJoint2D>().useMotor = true;
+            addForce = true;
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Cart"))
+        {
+            addForce = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(addForce)
+        {
+            Debug.Log(Time.fixedDeltaTime);
+            int x;
+            if (wheel1.velocity.x < 0) x = -1;
+            else x = 1;
+            
+            wheel1.AddForce(new Vector2(0.3f *x , wheel1.velocity.y), ForceMode2D.Impulse);
+            wheel2.AddForce(new Vector2(0.3f *x, wheel2.velocity.y), ForceMode2D.Impulse);
+        }
+    }
+
 }

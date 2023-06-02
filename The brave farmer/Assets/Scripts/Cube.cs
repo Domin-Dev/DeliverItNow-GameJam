@@ -24,7 +24,7 @@ public class Cube : MonoBehaviour
     {
         wateringCounter++;
 
-        if(wateringCounter % 2  == 0)
+        if(wateringCounter % 2  == 0 &&  plant.isHigh)
         {
             Vector3 position = plantList[0].position;
             Destroy(plantList[0].gameObject);
@@ -44,40 +44,62 @@ public class Cube : MonoBehaviour
     public void Hit()
     {
         wateringCounter--;
-
-        if (wateringCounter > 1)
+        if (plant.isHigh)
         {
-            if (wateringCounter % 2 == 0)
+
+            if (wateringCounter > 1)
             {
-                Vector3 position = plantList[0].position - new Vector3(0,0.16f,0);
+                if (wateringCounter % 2 == 0)
+                {
+                    Vector3 position = plantList[0].position - new Vector3(0, 0.16f, 0);
+                    Destroy(plantList[0].gameObject);
+                    plantList[0] = Instantiate(plant.plant2, position, Quaternion.identity, transform).transform;
+                    GameObject obj = plantList[plantList.Count - 1].gameObject;
+                    plantList.RemoveAt(plantList.Count - 1);
+                    Destroy(obj);
+
+                }
+                else
+                {
+                    Vector3 position = plantList[0].position;
+                    Destroy(plantList[0].gameObject);
+                    plantList[0] = Instantiate(plant.plant1, position, Quaternion.identity, transform).transform;
+
+                }
+            }
+            else if (wateringCounter >= 0)
+            {
+                if (wateringCounter == 0)
+                {
+                    Destroy(plantList[0].gameObject);
+                    plantList.Clear();
+                    canGrown = true;
+                }
+                else if (wateringCounter == 1)
+                {
+                    Vector3 position = plantList[0].position;
+                    Destroy(plantList[0].gameObject);
+                    plantList[0] = Instantiate(plant.plant1, position, Quaternion.identity, transform).transform;
+                }
+
+            }
+        }else
+        {
+            if (wateringCounter == 0)
+            {
+                Destroy(plantList[0].gameObject);
+                plantList.Clear();
+                canGrown = true;
+            }else
+            {
+                Vector3 position = plantList[0].position - new Vector3(0, 0.16f, 0);
                 Destroy(plantList[0].gameObject);
                 plantList[0] = Instantiate(plant.plant2, position, Quaternion.identity, transform).transform;
                 GameObject obj = plantList[plantList.Count - 1].gameObject;
                 plantList.RemoveAt(plantList.Count - 1);
                 Destroy(obj);
-               
-            }
-            else
-            {
-                Vector3 position = plantList[0].position;
-                Destroy(plantList[0].gameObject);
-                plantList[0] = Instantiate(plant.plant1, position, Quaternion.identity, transform).transform;         
 
             }
-        }else if(wateringCounter >= 0)
-        {
-            if(wateringCounter == 0)
-            {
-                Destroy(plantList[0].gameObject);
-                plantList.Clear();
-                canGrown = true;
-            }else if(wateringCounter == 1)
-            {
-                Vector3 position = plantList[0].position;
-                Destroy(plantList[0].gameObject);
-                plantList[0] = Instantiate(plant.plant1, position, Quaternion.identity, transform).transform;
-            }
-                 
         }
 
 

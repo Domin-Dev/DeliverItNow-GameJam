@@ -71,7 +71,7 @@ public class GroundChecker : MonoBehaviour
             if (cube.wateringCounter < 1 &&  cube.CanGrown())
             {
                 Vector2 position = cubeTransform.position;
-                cube.Planting(cubeTransform.parent.GetComponent<GroundController>().GetSunFlower());
+                cube.Planting(cubeTransform.parent.GetComponent<GroundController>().GetSeeds());
                 return true;
             }
             else if(cube.wateringCounter > 0)
