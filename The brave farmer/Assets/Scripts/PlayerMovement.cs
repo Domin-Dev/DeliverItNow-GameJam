@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpPower;
 
+
+
     Rigidbody2D rigidbody2D;
     SpriteRenderer spriteRenderer;
     GroundChecker groundChecker;
@@ -52,12 +54,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Hit");
         } 
         
-        if (Input.GetKeyDown(KeyCode.Q) && groundChecker.CanGrow())
+        if (Input.GetKeyDown(KeyCode.Q) && groundChecker.CanGrow(true))
         {
             animator.SetTrigger("Watering");
         } 
         
-        if (Input.GetKeyDown(KeyCode.R) && groundChecker.CanGrow())
+        if (Input.GetKeyDown(KeyCode.R) && groundChecker.CanGrow(false))
         {
             animator.SetTrigger("Seeding");
         }

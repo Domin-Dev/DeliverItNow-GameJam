@@ -6,6 +6,14 @@ public class GroundChecker : MonoBehaviour
 {
     bool isGrounded;
     Transform cubeTransform;
+    GroundController groundController;
+    Error error;
+
+    private void Start()
+    {
+        error = FindObjectOfType<Error>();
+        groundController = FindObjectOfType<GroundController>().GetComponent<GroundController>();
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -55,6 +63,7 @@ public class GroundChecker : MonoBehaviour
             if (cubeTransform.GetComponent<Cube>().wateringCounter > 0)
             {
                 cubeTransform.GetComponent<Cube>().Hit();
+                groundController.AddWater();
                 return true;
             }
             else
@@ -63,23 +72,28 @@ public class GroundChecker : MonoBehaviour
         else
             return false;
     }
-    public bool CanGrow()
+    public bool CanGrow(bool isWatering)
     {
         if (cubeTransform != null)
         {
             Cube cube = cubeTransform.GetComponent<Cube>();
-            if (cube.wateringCounter < 1 &&  cube.CanGrown())
+            if (cube.wateringCounter < 1 &&  cube.CanGrown() && groundController.WaterCounter > 0 && !isWatering)
             {
                 Vector2 position = cubeTransform.position;
-                cube.Planting(cubeTransform.parent.GetComponent<GroundController>().GetSeeds());
+                cube.Planting(groundController.GetSeeds());
+                groundController.SubtractWater();
                 return true;
             }
-            else if(cube.wateringCounter > 0)
+            else if(cube.wateringCounter > 0 && groundController.WaterCounter > 0 && isWatering)
             {
                 cube.Watering();
+                groundController.SubtractWater();
                 return true;
             }
-            else
+            else if(groundController.WaterCounter <= 0)
+            {
+                error.SetError("no water!");
+            }
                 return false;
         }
         else

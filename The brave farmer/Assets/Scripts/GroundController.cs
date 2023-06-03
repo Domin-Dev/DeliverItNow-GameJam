@@ -11,6 +11,10 @@ public class GroundController : MonoBehaviour
     [SerializeField]  Plant pumpkin;
     [SerializeField]  Plant cucumber;
 
+    [SerializeField] Text water;
+    [SerializeField] Text description;
+    public int WaterCounter;
+    private int StartWater;
 
 
     [Space]
@@ -24,7 +28,33 @@ public class GroundController : MonoBehaviour
 
     private void Start()
     {
+        StartWater = WaterCounter;
+        UpdateCounter();
         Select(sunflower);
+
+    }
+
+    private void UpdateCounter()
+    {
+        water.text = WaterCounter.ToString();
+    }
+
+    public void SubtractWater()
+    {
+        WaterCounter--;
+        UpdateCounter();
+    }
+
+    public void AddWater()
+    {
+        WaterCounter++;
+        UpdateCounter();
+    }
+
+    public void ResetWater()
+    {
+        WaterCounter = StartWater;
+        UpdateCounter();
     }
 
     private void Select(Plant plant)
@@ -34,6 +64,7 @@ public class GroundController : MonoBehaviour
             selectedPlant.image.sprite = sprite1;
         }
         selectedPlant = plant;
+        description.text = plant.description;
         selectedPlant.image.sprite = sprite2;
     }
     private void Update()
