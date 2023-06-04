@@ -30,18 +30,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            Transform transformCart = GameObject.FindGameObjectWithTag("Cart").transform;
-            transformCart.parent.GetChild(1).GetComponent<WheelJoint2D>().useMotor = true;
-            transformCart.parent.GetChild(2).GetComponent<WheelJoint2D>().useMotor = true;
-        }
-
-
         if(transform.position.y < -2)
         {
-            rigidbody2D.velocity = Vector2.zero;
-            transform.position = startPosition;
+            ResetPosition();
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && groundChecker.IsGrounded())
@@ -66,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void ResetPosition()
+    {
+        rigidbody2D.velocity = Vector2.zero;
+        transform.position = startPosition;
+    }
     private void FixedUpdate()
     {
         float Horizontal = Input.GetAxis("Horizontal");

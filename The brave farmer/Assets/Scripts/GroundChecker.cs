@@ -66,11 +66,17 @@ public class GroundChecker : MonoBehaviour
                 groundController.AddWater();
                 return true;
             }
-            else
+            else 
+            {
+                error.SetError("no plant!");
                 return false;
+            }
         }
         else
+        {
+            error.SetError("no plant!");
             return false;
+        }
     }
     public bool CanGrow(bool isWatering)
     {
@@ -93,11 +99,25 @@ public class GroundChecker : MonoBehaviour
             else if(groundController.WaterCounter <= 0)
             {
                 error.SetError("no water!");
+            }else if(cube.wateringCounter == 0 && isWatering)
+            {
+                error.SetError("no plant!");
+            }else if(cube.wateringCounter > 0 && !isWatering)
+            {
+                error.SetError("planted!");
+            }else
+            {
+                error.SetError("no soil!");
             }
+
                 return false;
         }
         else
+        {
+            error.SetError("no plant!");
             return false;
+        }
+
         
     }
 

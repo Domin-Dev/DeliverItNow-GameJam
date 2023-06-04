@@ -41,10 +41,11 @@ public class Push : MonoBehaviour
             if (wheel1.velocity.x < 0) x = -1;
             else x = 1;
             
-            transformCart.parent.GetComponent<Rigidbody2D>().AddForce(transformCart.parent.GetComponent<Rigidbody2D>().velocity.normalized * 1.5f, ForceMode2D.Impulse);
-            //   wheel1.AddForce(new Vector2(0.3f *x , wheel1.velocity.y), ForceMode2D.Impulse);
-            //   wheel2.AddForce(new Vector2(0.3f *x, wheel2.velocity.y), ForceMode2D.Impulse);
+  //          transformCart.parent.GetComponent<Rigidbody2D>().AddForce(transformCart.parent.GetComponent<Rigidbody2D>().velocity.normalized * 1.5f, ForceMode2D.Impulse);
+               wheel1.AddForce(new Vector2(0.4f, wheel1.velocity.y), ForceMode2D.Impulse);
+               wheel2.AddForce(new Vector2(0.4f, wheel2.velocity.y), ForceMode2D.Impulse);
         }
     }
 
+    
 }

@@ -44,7 +44,7 @@ public class Cube : MonoBehaviour
     public void Hit()
     {
         wateringCounter--;
-        if (plant.isHigh)
+        if(plant.isHigh)
         {
 
             if (wateringCounter > 1)
@@ -105,11 +105,13 @@ public class Cube : MonoBehaviour
 
     }
 
-    private void Update()
+
+
+    public void SetCollider(bool enabled)
     {
-        if(Input.GetKeyDown(KeyCode.Tab) && plantList.Count > 0)
+        if(plantList.Count > 0)
         {
-            plantList[0].GetComponent<PolygonCollider2D>().enabled = true;
+            plantList[0].GetComponent<Collider2D>().enabled = enabled;
         }
     }
     public bool CanGrown()
