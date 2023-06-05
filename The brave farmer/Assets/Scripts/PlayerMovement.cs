@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GroundChecker groundChecker;
     Animator animator;
+    Sounds sounds;
 
 
     bool isJumping;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 startPosition;
     private void Start()
     {
+        Cursor.visible = false;
+        sounds = FindObjectOfType<Sounds>();
         startPosition = transform.position;
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -42,18 +45,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && groundChecker.CanHit())
         {
+            sounds.PlaySound(0);
             animator.SetTrigger("Hit");
         } 
         
-        if (Input.GetKeyDown(KeyCode.Q) && groundChecker.CanGrow(true))
+        if (Input.GetKeyDown(KeyCode.Q) && groundChecker.CanGrow())
         {
+            sounds.PlaySound(1);
             animator.SetTrigger("Watering");
         } 
         
-        if (Input.GetKeyDown(KeyCode.R) && groundChecker.CanGrow(false))
-        {
-            animator.SetTrigger("Seeding");
-        }
+
 
     }
 
@@ -76,13 +78,18 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping",false);
         }
 
+        if(Horizontal != 0 && rigidbody2D.velocity.y < 0.01f)
+        {
+            sounds.PlaySound(3);
+        }
+
         if(Horizontal < 0)
         {
             transform.rotation = new Quaternion(0, 180, 0, 0);
             animator.SetBool("IsWalking", true);
         }
         else if(Horizontal > 0)
-        {
+        {         
             transform.rotation = new Quaternion(0, 0, 0, 0);
             animator.SetBool("IsWalking", true);
         }

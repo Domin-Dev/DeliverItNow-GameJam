@@ -78,19 +78,19 @@ public class GroundChecker : MonoBehaviour
             return false;
         }
     }
-    public bool CanGrow(bool isWatering)
+    public bool CanGrow()
     {
         if (cubeTransform != null)
         {
             Cube cube = cubeTransform.GetComponent<Cube>();
-            if (cube.wateringCounter < 1 &&  cube.CanGrown() && groundController.WaterCounter > 0 && !isWatering)
+            if (cube.wateringCounter < 1 &&  cube.CanGrown() && groundController.WaterCounter > 0)
             {
                 Vector2 position = cubeTransform.position;
                 cube.Planting(groundController.GetSeeds());
                 groundController.SubtractWater();
                 return true;
             }
-            else if(cube.wateringCounter > 0 && groundController.WaterCounter > 0 && isWatering)
+            else if(cube.wateringCounter > 0 && groundController.WaterCounter > 0)
             {
                 cube.Watering();
                 groundController.SubtractWater();
@@ -99,12 +99,9 @@ public class GroundChecker : MonoBehaviour
             else if(groundController.WaterCounter <= 0)
             {
                 error.SetError("no water!");
-            }else if(cube.wateringCounter == 0 && isWatering)
+            }else if(cube.wateringCounter == 0)
             {
                 error.SetError("no plant!");
-            }else if(cube.wateringCounter > 0 && !isWatering)
-            {
-                error.SetError("planted!");
             }else
             {
                 error.SetError("no soil!");

@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Sounds : MonoBehaviour
 {
-   [SerializeField] List<AudioClip> list = new List<AudioClip>();
+   [SerializeField] List<AudioClip> listMusic = new List<AudioClip>();
+   [SerializeField] List<AudioClip> listSounds = new List<AudioClip>();
 
 
 
-    public AudioSource audioSource;
+    public AudioSource musicAudio;
+    public AudioSource soundsAudio;
     [SerializeField]int index = 0;
 
     static Sounds sounds;
@@ -19,7 +21,7 @@ public class Sounds : MonoBehaviour
     private void Start()
     {
         if (sounds != null)
-        {
+        {       
             Destroy(this.gameObject);
         }
         else
@@ -27,19 +29,32 @@ public class Sounds : MonoBehaviour
             sounds = this;
         }
 
-        audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(list[0]);
+        musicAudio = GetComponent<AudioSource>();
+        soundsAudio = transform.GetChild(0).GetComponent<AudioSource>();
+        musicAudio.PlayOneShot(listMusic[0]);
         index++;
         DontDestroyOnLoad(gameObject);
 
     }
 
+    public void PlaySound(int index)
+    {
+        if (index < listSounds.Count)
+        {
+            if (index == 3 || index == 2 || index == 5) { if (!soundsAudio.isPlaying) soundsAudio.PlayOneShot(listSounds[index]); }
+            else
+            {
+                soundsAudio.PlayOneShot(listSounds[index]);
+            }
+        }
+    }
+
     private void Update()
     {
-        if(!audioSource.isPlaying)
+        if(musicAudio != null && !musicAudio.isPlaying)
         {
-            audioSource.PlayOneShot(list[index]);
-            if (index >= list.Count - 1) index = 0;
+            musicAudio.PlayOneShot(listMusic[index]);
+            if (index >= listMusic.Count - 1) index = 0;
             else index++;
         }
     }

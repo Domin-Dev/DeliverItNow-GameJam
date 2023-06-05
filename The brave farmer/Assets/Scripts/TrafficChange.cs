@@ -8,7 +8,8 @@ public class TrafficChange : MonoBehaviour
     {
         if(collision.CompareTag("Cart"))
         {
-            collision.GetComponent<Cart>().Change();
+            collision.transform.parent.GetComponent<Cart>().Change();
+            FindObjectOfType<Sounds>().PlaySound(2);
         }
     }
 }

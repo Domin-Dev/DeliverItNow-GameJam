@@ -11,8 +11,10 @@ public class CameraController : MonoBehaviour
     CinemachineVirtualCamera cameraV;
     [SerializeField] Transform pause;
 
+    Sounds sounds;
     private void Start()
     {
+        sounds = FindObjectOfType<Sounds>();
         ground = FindObjectOfType<GroundController>().transform;
         cameraV = transform.GetComponent<CinemachineVirtualCamera>();
         player = FindObjectOfType<PlayerMovement>().transform;
@@ -25,19 +27,25 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            sounds.PlaySound(2);
             Switch();
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(pause.gameObject.activeSelf)
+           
+            sounds.PlaySound(2);
+            if (pause.gameObject.activeSelf)
             {
                 pause.gameObject.SetActive(false);
                 Time.timeScale = 1;
-            }else
+                Cursor.visible = false;
+            }
+            else
             {
                 pause.gameObject.SetActive(true);
                 Time.timeScale = 0;
+                Cursor.visible = true;
             }
 
         }

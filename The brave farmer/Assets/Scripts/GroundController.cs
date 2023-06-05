@@ -24,10 +24,12 @@ public class GroundController : MonoBehaviour
 
     Plant selectedPlant;
     [SerializeField] GameObject waterParticle;
+    Sounds sounds;
 
 
     private void Start()
     {
+        sounds = FindObjectOfType<Sounds>();
         StartWater = WaterCounter;
         UpdateCounter();
         Select(sunflower);
@@ -59,7 +61,7 @@ public class GroundController : MonoBehaviour
 
     private void Select(Plant plant)
     {
-        if(selectedPlant != null)
+        if (selectedPlant != null)
         {
             selectedPlant.image.sprite = sprite1;
         }
@@ -72,20 +74,27 @@ public class GroundController : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha1))
         {
             Select(sunflower);
+            sounds.PlaySound(2);
         }
         else if (Input.GetKey(KeyCode.Alpha2))
         {
             Select(pumpkin);
+            sounds.PlaySound(2);
         }
         else if (Input.GetKey(KeyCode.Alpha3))
         {
             Select(tomatoes);
-        }else if (Input.GetKey(KeyCode.Alpha4))
+            sounds.PlaySound(2);
+        }
+        else if (Input.GetKey(KeyCode.Alpha4))
         {
             Select(paprika);
-        }else if (Input.GetKey(KeyCode.Alpha5))
+            sounds.PlaySound(2);
+        }
+        else if (Input.GetKey(KeyCode.Alpha5))
         {
             Select(cucumber);
+            sounds.PlaySound(2);
         }
     }
 

@@ -12,12 +12,18 @@ public class Volume : MonoBehaviour
     private void Start()
     {
         sounds = FindObjectOfType<Sounds>();
-       if(sounds.audioSource != null) slider1.value = sounds.audioSource.volume;
+       if(sounds.musicAudio != null) slider1.value = sounds.musicAudio.volume;
+       if(sounds.soundsAudio != null) slider2.value = sounds.soundsAudio.volume;
 
     }
 
     public void ChangeVolumeMusic()
     {
-        sounds.audioSource.volume = slider1.value;
+        sounds.musicAudio.volume = slider1.value;
+    }
+
+    public void ChangeVolumeSounds()
+    {
+        sounds.soundsAudio.volume = slider2.value;
     }
 }
